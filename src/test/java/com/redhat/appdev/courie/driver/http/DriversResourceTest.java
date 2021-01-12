@@ -2,7 +2,10 @@ package com.redhat.appdev.courie.driver.http;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,16 +13,19 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import com.redhat.appdev.courie.driver.KafkaTestDependency;
 import com.redhat.appdev.courie.driver.domain.Driver;
 import com.redhat.appdev.courie.driver.domain.LatLng;
 import com.redhat.appdev.courie.driver.service.DriverService;
 import com.redhat.appdev.courie.driver.utlis.Utils;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
 
 @QuarkusTest
+@QuarkusTestResource(KafkaTestDependency.class)
 public class DriversResourceTest {
 
 	@InjectMock
