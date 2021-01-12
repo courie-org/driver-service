@@ -5,7 +5,7 @@ import org.mockito.Mockito;
 
 import com.redhat.appdev.courie.driver.data.DriverRepository;
 import com.redhat.appdev.courie.driver.domain.Driver;
-import com.redhat.appdev.courie.driver.domain.LatLng;
+import com.redhat.appdev.courie.driver.utlis.Utils;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -17,7 +17,7 @@ public class DriverServiceImplTest {
 	
 	@Test
 	public void shouldUpdateDriver() {
-		Driver driver = new Driver("12", "Ron Weasley", "cx-wefsd", "Magical Car", new LatLng("10", "10"));
+		Driver driver = Utils.RON;
 		driverService.update(driver);
 		
 		Mockito.verify(repo, Mockito.atLeast(1)).save(driver);
