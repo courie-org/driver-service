@@ -17,7 +17,8 @@ import javax.ws.rs.core.Response.Status;
 import com.redhat.appdev.courie.driver.domain.Driver;
 import com.redhat.appdev.courie.driver.service.DriverService;
 
-@ApplicationScoped@Path("/drivers")
+@ApplicationScoped
+@Path("/drivers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DriversResource {
