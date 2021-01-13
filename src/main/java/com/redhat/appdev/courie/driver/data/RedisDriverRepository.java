@@ -42,12 +42,6 @@ public class RedisDriverRepository implements DriverRepository {
 	}
 
 	@Override
-	public void add(Driver driver) {
-		Gson gson = new GsonBuilder().create();
-		this.client.set(Arrays.asList(calculateId(driver.getId()), gson.toJson(driver)));
-	}
-
-	@Override
 	public Set<Driver> getAllDrivers() {
 		Set<Driver> drivers = new HashSet<>();
 		Gson gson = new GsonBuilder().create();

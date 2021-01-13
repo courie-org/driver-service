@@ -51,7 +51,7 @@ public class DriverServiceImplTest {
 		Driver driver = Utils.RON;
 		driverService.newDriver(driver);
 		
-		verify(repo, times(1)).add(driver);
+		verify(repo, times(1)).save(driver);
 		
 	}
 	

@@ -21,7 +21,7 @@ public class InMemoryDriverRepositoryTest {
 	
 	@Test
 	public void shouldAddDriverAndFindDriver() {
-		this.driverRepo.add(Utils.RON);
+		this.driverRepo.save(Utils.RON);
 		Optional<Driver> shouldBeRon = this.driverRepo.findById(Utils.RON.getId());
 		
 		assertTrue(shouldBeRon.isPresent());
@@ -30,7 +30,7 @@ public class InMemoryDriverRepositoryTest {
 	
 	@Test
 	public void shouldNotFindDriver() {
-		this.driverRepo.add(Utils.RON);
+		this.driverRepo.save(Utils.RON);
 		Optional<Driver> shouldBeRon = this.driverRepo.findById("24");
 		
 		assertFalse(shouldBeRon.isPresent());
@@ -55,8 +55,8 @@ public class InMemoryDriverRepositoryTest {
 	
 	@Test
 	public void shouldFindAvailableDriver() {
-		this.driverRepo.add(Utils.RON);
-		this.driverRepo.add(Utils.UNAVALABLE);
+		this.driverRepo.save(Utils.RON);
+		this.driverRepo.save(Utils.UNAVALABLE);
 		
 		Optional<Driver> shouldBeRon = this.driverRepo.findAvailableDriver();
 		
@@ -66,7 +66,7 @@ public class InMemoryDriverRepositoryTest {
 	
 	@Test
 	public void shouldFindNoAvailableDrivers() {
-		this.driverRepo.add(Utils.UNAVALABLE);
+		this.driverRepo.save(Utils.UNAVALABLE);
 		
 		Optional<Driver> shouldBeEmpty = this.driverRepo.findAvailableDriver();
 		
@@ -75,8 +75,8 @@ public class InMemoryDriverRepositoryTest {
 	
 	@Test
 	public void shouldFindAllDrivers() {
-		this.driverRepo.add(Utils.RON);
-		this.driverRepo.add(Utils.UNAVALABLE);
+		this.driverRepo.save(Utils.RON);
+		this.driverRepo.save(Utils.UNAVALABLE);
 		
 		Set<Driver> drivers = this.driverRepo.getAllDrivers();
 		

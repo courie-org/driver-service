@@ -18,12 +18,6 @@ public class InMemoryDriverRepository implements DriverRepository {
 	}
 
 	@Override
-	public void add(Driver newDelivery) {
-		this.driverStore.add(newDelivery);
-		
-	}
-
-	@Override
 	public void save(Driver d) {
 		this.driverStore.remove(d);
 		this.driverStore.add(d);
