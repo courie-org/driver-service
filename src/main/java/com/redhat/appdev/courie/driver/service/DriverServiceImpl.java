@@ -12,7 +12,6 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.redhat.appdev.courie.driver.data.DriverRepository;
-import com.redhat.appdev.courie.driver.data.Redis;
 import com.redhat.appdev.courie.driver.domain.DeliveryAssignment;
 import com.redhat.appdev.courie.driver.domain.DeliveryDirections;
 import com.redhat.appdev.courie.driver.domain.Driver;
@@ -39,7 +38,7 @@ public class DriverServiceImpl implements DriverService {
 			@Channel("delivery-pickedup") Emitter<DeliveryPickedUp> deliveryPickedUpEmitter,
 			@Channel("delivery-droppedoff") Emitter<DeliveryDroppedOff> deliveryDroppedOffEmitter,
 			DirectionsService directions, 
-			@Redis DriverRepository repository) {
+			DriverRepository repository) {
 		this.client = client;
 		this.driverAssignedEmitter = driverAssignedEmitter;
 		this.deliveryStartedEmitter = deliveryStartedEmitter;

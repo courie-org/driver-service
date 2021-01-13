@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.redhat.appdev.courie.driver.domain.Driver;
 
-@InMemory
 public class InMemoryDriverRepository implements DriverRepository {
 
 	private Set<Driver> driverStore = new HashSet<>();
