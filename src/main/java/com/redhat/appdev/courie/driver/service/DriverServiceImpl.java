@@ -25,7 +25,7 @@ import com.redhat.appdev.courie.driver.messaging.DriverAssigned;
 public class DriverServiceImpl implements DriverService {
 	
 	private DeliveryApiClient client;
-	private Emitter<DriverAssigned> emitter;
+	private Emitter<DriverAssigned> driverAssignedEmitter;
 	private Emitter<DeliveryStarted> deliveryStartedEmitter;
 	private Emitter<DeliveryPickedUp> deliveryPickedUpEmitter;
 	private Emitter<DeliveryDroppedOff> deliveryDroppedOffEmitter;
@@ -33,13 +33,15 @@ public class DriverServiceImpl implements DriverService {
 	private DriverRepository repository;
 	
 	@Inject
-	public DriverServiceImpl(@RestClient DeliveryApiClient client, @Channel("driver-assigned") Emitter<DriverAssigned> emitter,
+	public DriverServiceImpl(@RestClient DeliveryApiClient client, 
+			@Channel("driver-assigned") Emitter<DriverAssigned> driverAssignedEmitter,
 			@Channel("delivery-started") Emitter<DeliveryStarted> deliveryStartedEmitter, 
 			@Channel("delivery-pickedup") Emitter<DeliveryPickedUp> deliveryPickedUpEmitter,
 			@Channel("delivery-droppedoff") Emitter<DeliveryDroppedOff> deliveryDroppedOffEmitter,
-			DirectionsService directions, @Redis DriverRepository repository) {
+			DirectionsService directions, 
+			@Redis DriverRepository repository) {
 		this.client = client;
-		this.emitter = emitter;
+		this.driverAssignedEmitter = driverAssignedEmitter;
 		this.deliveryStartedEmitter = deliveryStartedEmitter;
 		this.deliveryPickedUpEmitter = deliveryPickedUpEmitter;
 		this.deliveryDroppedOffEmitter = deliveryDroppedOffEmitter;
@@ -68,7 +70,7 @@ public class DriverServiceImpl implements DriverService {
 					
 					this.repository.save(driver);
 					
-					this.emitter.send(new DriverAssigned(driver.getId(), deliveryId, 
+					this.driverAssignedEmitter.send(new DriverAssigned(driver.getId(), deliveryId, 
 							delivery.getPickupLatLng(), delivery.getPickupAddress(), 
 							delivery.getDropoffLatLng(), delivery.getDropoffAddress()));
 				}
